@@ -18,20 +18,18 @@
 }
 #meals-ingredient{
     width: 330px ;
-    border: 1px solid aliceblue;
-    box-shadow: 15px 15px 20px gray;
+    box-shadow: 5px 10px 25px gray;
     border-radius: 10px;
     margin-bottom: 40px;
-    padding: 15px;
 }
 .ingredient{
     text-align: center;
     border-radius: 10px;
+    padding: 15px;
 }
 .ingredient h5{
     text-align: left;
 }
-
 .ingredient img{
     width: 300px;
     border-radius: 10px;
@@ -39,4 +37,5 @@
 }
 .ingredientList li{
     list-style-type: square;
+    /* margin-bottom: 10px; */
 }
