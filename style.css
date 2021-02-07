@@ -1,0 +1,42 @@
+#meal-items{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 15px;
+    max-width: fit-content;
+}
+.meal{
+    text-align: center;
+    box-shadow: 5px 10px 20px gray;
+    border-radius: 10px;
+    /* margin: 20px; */
+    padding: 15px;
+}
+.meal img{
+    width: 250px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+#meals-ingredient{
+    width: 330px ;
+    border: 1px solid aliceblue;
+    box-shadow: 15px 15px 20px gray;
+    border-radius: 10px;
+    margin-bottom: 40px;
+    padding: 15px;
+}
+.ingredient{
+    text-align: center;
+    border-radius: 10px;
+}
+.ingredient h5{
+    text-align: left;
+}
+
+.ingredient img{
+    width: 300px;
+    border-radius: 10px;
+    text-align: center;
+}
+.ingredientList li{
+    list-style-type: square;
+}
