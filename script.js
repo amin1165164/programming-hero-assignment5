@@ -1,59 +1,55 @@
-const findMeals = meal => {
+// search meal name by name
+const searchMeals = () => {
+    document.getElementById("meals-ingredient").innerHTML = "";
     const mealName = document.getElementById("meal-name").value;
     document.getElementById("meal-name").value = "";
-    fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${mealName}`)
-    .then(response => response.json())
-    .then(data => displayFoods(data))
-    // .catch(function() {
-    //     console.log("error");
-    // }
 
+    // checking wether search box empty or not
+    if(mealName == ""){
+        alert("You cannot left blank in this portion. Please put a name of Meal.")
+    }
+    else{
+        fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${mealName}`)
+        .then(response => response.json())
+        .then(data => displayMeals(data))
+
+        // Invalid name encounter error message 
+        .catch((error) => {
+            alert("Invalid Meal Name. Please put a valid meal name.");
+        })
+    }
 }
 
-const displayFoods = foods => {
-    console.log(foods);
+// meals display function
+const displayMeals = meals => {
     const mealsDiv = document.getElementById("meal-items");
     mealsDiv.innerHTML = "";
 
-    foods.meals.forEach(food => {
+    meals.meals.forEach(meal => {
         const mealDiv = document.createElement("div");
         mealDiv.className = 'meal';
         const mealInfo = `
-            <img src = "${food.strMealThumb}">
-            <h5><a href="#" onclick = "ingredientsOfMeals('${food.strMeal}')">${food.strMeal}</a></h5>
+            <a href="#" onclick = "ingredientsOfMeals('${meal.strMeal}')"><img src = "${meal.strMealThumb}"></a>
+            <h5><a href="#" onclick = "ingredientsOfMeals('${meal.strMeal}')">${meal.strMeal}</a></h5>
         `
         mealDiv.innerHTML = mealInfo;
-
         mealsDiv.appendChild(mealDiv);
-        
     });
 }
 
 
+// fetch Ingredient API
 const ingredientsOfMeals = mealsIngredients => {
-    // const ingredient = document.getElementById("meals-ingredient").value;
-    // console.log(ingredient);
-    
     fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${mealsIngredients}`)
     .then(response => response.json())
     .then(data => displayIngredients(data.meals[0]))
-        // {
-        // const meal = data.meals;
-        // // ingredientsOfMeal(meal[0]);
-        // console.log(meal);});
 };
 
-const displayIngredients = ingredient => {
 
+// displaying information of particular meal
+const displayIngredients = ingredient => {
     const mealsIngredientDiv = document.getElementById("meals-ingredient");
     mealsIngredientDiv.innerHTML = "";
-
-
-    // console.log(ingredient);
-    // const imgOfMeal = ingredient.strMealThumb;
-    // console.log(imgOfMeal);
-    // const nameOfMeal = ingredient.strMeal;
-    // console.log(nameOfMeal);
     const mealIngredientDiv = document.createElement("div");
     mealIngredientDiv.className = 'ingredient';
     const ingredientInfo = `
@@ -68,13 +64,12 @@ const displayIngredients = ingredient => {
     mealsIngredientDiv.appendChild(mealIngredientDiv);
     mealsIngredientDiv.appendChild(mealIngredientUl);
 
-    
-
+// using for loop for showing ingredients
     for(let i = 1; i < 25; i++){
-        const listOfIngredient = `strIngredient${i}`
-        if(ingredient[listOfIngredient]!="" && ingredient[listOfIngredient]!= undefined){
+        const ingredientListsOfMeal = `strIngredient${i}`
+        if(ingredient[ingredientListsOfMeal]!="" && ingredient[ingredientListsOfMeal]!= undefined){
             const li = document.createElement("li");
-            li.innerText = ingredient[listOfIngredient];
+            li.innerText = ingredient[ingredientListsOfMeal];
             mealIngredientUl.appendChild(li);
         }
     }
